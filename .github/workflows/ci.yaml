@@ -6,10 +6,31 @@ on:
 
 jobs:
   run-ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Executa em um ambiente Ubuntu
+
+    strategy:
+      matrix:
+        node-version: [14.x]  # Testa em várias versões do Node.js
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-js@v3
+      # Passo 1: Faz checkout do código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Passo 2: Configura o Node.js com a versão especificada na matriz
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
-      - run: npm run test
+          node-version: ${{ matrix.node-version }}
+
+      # Passo 3: Instala as dependências usando npm ou yarn
+      - name: Install dependencies
+        run: npm install  # ou yarn install
+
+      # Passo 4: Executa os testes
+      - name: Run tests
+        run: npm test  # ou yarn test
+
+      # Passo 5: Faz o build do projeto (opcional)
+      - name: Build project
+        run: npm run build  # ou yarn build
