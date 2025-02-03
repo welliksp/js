@@ -15,11 +15,11 @@ jobs:
     steps:
       # Passo 1: Faz checkout do código do repositório
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Passo 2: Configura o Node.js com a versão especificada na matriz
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -30,3 +30,8 @@ jobs:
       # Passo 4: Executa os testes
       - name: Run tests
         run: npm test  # ou yarn test
+      
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
