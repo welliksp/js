@@ -8,8 +8,8 @@ jobs:
   run-ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-js@v6
+      - uses: actions/checkout@v3
+      - uses: actions/setup-js@v3
         with:
           node-version: '14'
       - run: npm run test
