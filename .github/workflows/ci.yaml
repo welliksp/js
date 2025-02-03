@@ -30,7 +30,3 @@ jobs:
       # Passo 4: Executa os testes
       - name: Run tests
         run: npm test  # ou yarn test
-
-      # Passo 5: Faz o build do projeto (opcional)
-      - name: Build project
-        run: npm run build  # ou yarn build
